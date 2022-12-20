@@ -226,8 +226,8 @@ jobs:
       - name: patch
         working-directory: ffmpeg_sources/ffmpeg
         run: |
-          git apply -v --ignore-whitespace ../../ffmpeg_patches/ffmpeg/01-idr-on-amf.patch
-          git apply -v --ignore-whitespace ../../ffmpeg_patches/ffmpeg/02-amf-color-fixes.patch
+          git apply -v --ignore-whitespace ../../ffmpeg_patches/ffmpeg/01-amf-colorspace-v2.patch
+          git apply -v --ignore-whitespace ../../ffmpeg_patches/ffmpeg/02-idr-on-amf.patch
           git apply -v --ignore-whitespace ../../ffmpeg_patches/ffmpeg/03-amfenc-disable-buffering.patch
 
       - name: Setup cross compilation
@@ -442,7 +442,7 @@ jobs:
 
       - name: Commit build
         if: ${{ github.ref == 'refs/heads/master' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') }}  # yamllint disable-line rule:line-length
-        uses: actions-js/push@v1.3
+        uses: actions-js/push@v1.4
         with:
           github_token: ${{ secrets.GH_BOT_TOKEN }}
           author_email: ${{ secrets.GH_BOT_EMAIL }}
