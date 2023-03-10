@@ -33,39 +33,6 @@
 extern "C" {
 #endif // __cplusplus
 
-#define OPT_LD                  1 // Optimize the performance of low delay mode
-
-#if OPT_LD
-#define OPT_LD_MRP              1 // Optimize MRP in low delay mode
-#define OPT_LD_TF               1 // Optimize TF in low delay mode
-#define OPT_LD_M13              1 // Optimize M13 in low delay mode
-#define OPT_LD_M9               1 // Optimize M9 in low delay mode
-#define OPT_LD_M10              1 // Optimize M10 in low delay mode
-#define OPT_LD_M11              1 // Optimize M11 in low delay mode
-#define OPT_LD_QPM              1 // Optimize QPM for low delay mode
-#define OPT_LD_M12_13           1 // Optimize M12 and M13 in low delay mode
-#define OPT_LD_LATENCY          1 // Optimize for low latency
-#define OPT_LD_LATENCY_MD       1 // Optimize MD for low latency KF
-#define OPT_LD_P2               1 // Optimize bdrate/speed trade off for low delay mode
-#define OPT_LD_MRP2             1 // Optimize MRP in low delay mode by changing the references
-#define OPT_CBR                 1 // Improve CBR by limiting the QP decrease between two base pictures
-#endif
-#define OPT_RPS_CONSTR             1 // Construct RPS in decode order; implement DPB at PD
-#if OPT_RPS_CONSTR
-#define OPT_RPS_CONSTR_2           1
-#define OPT_RPS_CONSTR_3           1
-#define FIX_INCOMP_MG_2            1 // Use 3L for incomplete MGs for all RA cases
-#define CLN_REMOVE_REF_CNT         1 // Remove scs->reference_count
-#define FIX_OVERLAY                1 // Fix overlay issue when OPT_RPS_CONSTR changes calling sequence
-#endif
-
-#define FIX_LAYER_SIGNAL           1
-#define FTR_PRED_STRUCT_CLASSIFIER 1
-#define FTR_PRED_STRUCT_CLASSIFIER2 1
-
-#define FIX_2009                   1 // fix for issue 2009, fixes mismatch between recon flag ON/OFF
-#define EN_WARNING_FOR_MISMATCH    1 // create a new warning for mismatch that is expected for recon ON/OFF and stat-report ON/OFF for 10bit path
-
 //FOR DEBUGGING - Do not remove
 #define LOG_ENC_DONE            0 // log encoder job one
 #define NO_ENCDEC               0 // bypass encDec to test cmpliance of MD. complained achieved when skip_flag is OFF. Port sample code from VCI-SW_AV1_Candidate1 branch

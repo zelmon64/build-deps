@@ -28,7 +28,7 @@ extern "C" {
  * has been modified, and reset anytime the major API version has
  * been changed. Used to keep track if a field has been added or not.
  */
-#define SVT_AV1_ENC_ABI_VERSION 7
+#define SVT_AV1_ENC_ABI_VERSION 6
 
 //***HME***
 
@@ -113,10 +113,8 @@ struct EbSvtAv1MasteringDisplayInfo {
 typedef struct PredictionStructureConfigEntry {
     uint32_t temporal_layer_index;
     uint32_t decode_order;
-#if !OPT_RPS_CONSTR_3
-    int32_t ref_list0[REF_LIST_MAX_DEPTH];
-    int32_t ref_list1[REF_LIST_MAX_DEPTH];
-#endif
+    int32_t  ref_list0[REF_LIST_MAX_DEPTH];
+    int32_t  ref_list1[REF_LIST_MAX_DEPTH];
 } PredictionStructureConfigEntry;
 
 // super-res modes
@@ -199,17 +197,6 @@ typedef enum SvtAv1RcMode {
     SVT_AV1_RC_MODE_VBR        = 1, // variable bit rate
     SVT_AV1_RC_MODE_CBR        = 2, // constant bit rate
 } SvtAv1RcMode;
-
-typedef enum SvtAv1FrameUpdateType {
-    SVT_AV1_KF_UPDATE,
-    SVT_AV1_LF_UPDATE,
-    SVT_AV1_GF_UPDATE,
-    SVT_AV1_ARF_UPDATE,
-    SVT_AV1_OVERLAY_UPDATE,
-    SVT_AV1_INTNL_OVERLAY_UPDATE, // Internal Overlay Frame
-    SVT_AV1_INTNL_ARF_UPDATE, // Internal Altref Frame
-    SVT_AV1_FRAME_UPDATE_TYPES
-} SvtAv1FrameUpdateType;
 
 // Will contain the EbEncApi which will live in the EncHandle class
 // Only modifiable during config-time.
@@ -648,7 +635,6 @@ typedef struct EbSvtAv1EncConfiguration {
     *
     * Default is -1. */
     int enable_restoration_filtering;
-
     /* motion field motion vector
     *
     *  Default is -1. */
@@ -887,19 +873,6 @@ typedef struct EbSvtAv1EncConfiguration {
      * Default is 0.
      */
     Bool gop_constraint_rc;
-
-    /**
-     * @brief scale factors for lambda value for different frame update types
-     * factor >> 7 (/ 128) is the actual value in float
-     */
-    int32_t lambda_scale_factors[SVT_AV1_FRAME_UPDATE_TYPES];
-
-    /* Dynamic gop
-    *
-    * 0 = disable Dynamic GoP
-    * 1 = enable Dynamic GoP
-    *  Default is 1. */
-    Bool enable_dg;
 } EbSvtAv1EncConfiguration;
 
 /**
